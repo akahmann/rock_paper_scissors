@@ -2,6 +2,8 @@ const { Pool } = require("pg");
 
 var dbName = "postgres://xyvynfzkbbhyte:1fa921bcd8c58b9b2c9fdbdb341f48718df4fb4f8d8c97534b643942ad66bb7e@ec2-54-83-8-246.compute-1.amazonaws.com:5432/d5hn9ej1pf6kn"
 const dbConnectionString = process.env.DATABASE_URL || dbName;
+//const dbConnectionString = process.env.DATABASE_URL || dbName;
+console.log("DB string: " + dbConnectionString);
 
 const pool = new Pool({dbConnectionString: dbConnectionString});
 
@@ -53,8 +55,9 @@ function getUser(req, res) {
    // var params = [id];
 
    getUserFromDb(id, function(error, result) {
+      console.log("Back from the database with result:", result);
       if (error || result == null || result.length != 1) {
-         res.status(500).json({sucess: false, data: error});
+         res.status(500).json({success: false, data: error});
       }
       else {
          var username = result[0];
