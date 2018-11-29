@@ -35,14 +35,36 @@ function displayFriends(req, res) {
    console.log("Displaying all friends");
 
    var id = req.params.id;
-   var username = "Bob";
 
-   var result = {id: id, username: username};
+   getFriendsFromDb(id, function(error, result) {
+      console.log("Back from the database with result:", result);
+      if (error || result == null) {
+         res.status(500).json({success: false, data: error});
+      }
+      else {
+         res.status(200).json(result);
+      }
+   })
+}
 
-   res.json(result);
+function getFriendsFromDb(id, callback) {
+   console.log("Getting all friends from DB from user with id: " + id);
 
-   //    Here we will do a sql query in order to find
-   //    all friends linked with this user
+   var sql = "SELECT u.id, username FROM users u JOIN friends f ON f.friend_id = u.id WHERE f.user_id = $1::int"
+
+   var params = [id];
+
+   pool.query(sql, params, function(err, result) {
+      if (err) {
+         console.log("Error in query: ")
+         console.log(err);
+         callback(err, null);
+      }
+
+      console.log("Found result: " + JSON.stringify(result.rows));
+
+      callback(null, result.rows);
+   });
 }
 
 function getUser(req, res) {
