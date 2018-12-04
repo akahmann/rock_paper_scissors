@@ -5,7 +5,7 @@ const dbConnectionString = process.env.DATABASE_URL || dbName;
 //const dbConnectionString = process.env.DATABASE_URL || dbName;
 console.log("DB string: " + dbConnectionString);
 
-const pool = new Pool({dbConnectionString: dbConnectionString});
+const pool = new Pool({connectionString: dbConnectionString});
 
 function createUser(req, res) {
    console.log("Creating user");
