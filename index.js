@@ -7,7 +7,7 @@ const controllers = require("./controllers.js");
 express()
    .use(express.json()) // supports JSON encoded bodies
    .use(express.urlencoded({extended: true})) // supports url-encoded bodies
-   .use(express.static(path.join(__dirname, "public")))
+   .use(express.static(path.join(__dirname, "/public")))
    .post("/createUser/:id/:username/:password", controllers.createUser)
    .post("/addFriend/:user_id/:id", controllers.addFriend)
    .get("/displayFriends/:id", controllers.displayFriends)

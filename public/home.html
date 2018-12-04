@@ -11,22 +11,20 @@
       function displayFriends() {
          console.log(document.getElementById("input").value);
          var input = document.getElementById("input").value;
-         var url = "https://fierce-fjord-41875.herokuapp.com/"
-                 + "displayFriends/" + input;
-         // var url = "http://localhost:5000/displayFriends/" + input;
+         //var url = "https://fierce-fjord-41875.herokuapp.com/"
+         //        + "displayFriends/" + input;
+         var url = "http://localhost:5000/displayFriends/" + input;
          var xhttp = new XMLHttpRequest();
          xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-               // var obj = JSON.parse(xhttp.responseText);
+               var obj = JSON.parse(xhttp.responseText);
 
-               // var text = "<div class=\"midbody\">";
+               var text = "<div class=\"midbody\">";
 
-               // for (var i = 0; i < xhttp.responseText.length; i++) {
-               //    text += obj.username + "<br>";
-               // }
-               // document.getElementById("results").innerHTML = text;
-               console.log(JSON.parse(xhttp.responseText));
-               document.getElementById("results").innerHTML = JSON.parse(xhttp.responseText);
+               for (var i = 0; i < xhttp.responseText.length; i++) {
+                  text += obj.username + "<br>";
+               }
+               document.getElementById("results").innerHTML = text;
             }
          };
          xhttp.open("GET", url, true);

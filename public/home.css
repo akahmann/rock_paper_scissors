@@ -1,0 +1,57 @@
+body {
+   background-color: rgb(21, 22, 21);
+}
+
+h1 {
+   color : rgb(88, 211, 109);
+   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+   text-align: center;
+   font-size: 60px;
+}
+
+.midbody {
+   background-color: rgb(135, 163, 135);
+   opacity: 0.5;
+   margin: 40px;
+   padding: 20px;
+   text-align: center;
+   font-size: 22px;
+   font-weight: bold;
+   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+   color: rgb(155, 255, 155);
+}
+
+input[type=text] {
+   background-color: rgb(17, 38, 17);
+   border: 2px solid #518751;
+   opacity: 0.6;
+   font-size: 16px;
+   font-weight: bold;
+   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+   color: rgb(54, 249, 54);
+   width: 30%;
+   padding: 12px 20px;
+   margin: 8px;
+   display: inline-block;
+   box-sizing: border-box;
+}
+
+input[type=text]:hover {
+   border: 2px solid #00ff00;
+}
+
+button[type=button] {
+   background-color: rgb(17, 38, 17);
+   border: 3px solid #518751;
+   opacity: 0.8;
+   font-size: 20px;
+   font-weight: bold;
+   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+   color: rgb(54, 249, 54);
+   border-radius: 4px;
+   padding: 10px;
+}
+
+button[type=button]:hover {
+   border: 3px solid #00ff00;
+}
