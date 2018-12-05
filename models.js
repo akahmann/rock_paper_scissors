@@ -1,7 +1,7 @@
 const { Pool } = require("pg");
 
-//var dbName = "postgres://xyvynfzkbbhyte:1fa921bcd8c58b9b2c9fdbdb341f48718df4fb4f8d8c97534b643942ad66bb7e@ec2-54-83-8-246.compute-1.amazonaws.com:5432/d5hn9ej1pf6kn";
-var dbName = process.env.DATABASE_URL || "postgres://pbjuser:rosebud@localhost:5432/pbjgame";
+var dbName = "postgres://xyvynfzkbbhyte:1fa921bcd8c58b9b2c9fdbdb341f48718df4fb4f8d8c97534b643942ad66bb7e@ec2-54-83-8-246.compute-1.amazonaws.com:5432/d5hn9ej1pf6kn";
+//var dbName = process.env.DATABASE_URL || "postgres://pbjuser:rosebud@localhost:5432/pbjgame";
 const dbConnectionString = process.env.DATABASE_URL || dbName;
 
 const pool = new Pool({connectionString: dbConnectionString});
