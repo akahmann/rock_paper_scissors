@@ -3,40 +3,19 @@
 <head>
    <meta charset="utf-8">
    <link rel="stylesheet" type="text/css" href="home.css">
+   <script type="text/javascript" src="home.js"></script>
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <title>Dodge the Blocks</title>
-
-   <script type="text/javascript">
-
-      function displayFriends() {
-         console.log(document.getElementById("input").value);
-         var input = document.getElementById("input").value;
-         //var url = "https://fierce-fjord-41875.herokuapp.com/"
-         //        + "displayFriends/" + input;
-         var url = "http://localhost:5000/displayFriends/" + input;
-         var xhttp = new XMLHttpRequest();
-         xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-               var obj = JSON.parse(xhttp.responseText);
-
-               var text = "<div class=\"midbody\">";
-
-               for (var i = 0; i < xhttp.responseText.length; i++) {
-                  text += obj.username + "<br>";
-               }
-               document.getElementById("results").innerHTML = text;
-            }
-         };
-         xhttp.open("GET", url, true);
-         xhttp.send();
-      }
-
-   </script>
 
 </head>
 <body>
 
 <h1>Dodge the Blocks</h1>
+
+<div class="midbody">
+   <form action="../">
+   </form>
+</div>
 
 <div class="midbody">
    Display all friends from user with id... <br>
