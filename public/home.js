@@ -2,8 +2,8 @@ function displayFriends() {
 
    console.log(document.getElementById("input").value);
    var input = document.getElementById("input").value;
-   //var url = "https://fierce-fjord-41875.herokuapp.com/displayFriends/" + input;
-   var url = "../displayFriends/" + input;
+   var url = "https://fierce-fjord-41875.herokuapp.com/displayFriends/" + input;
+   //var url = "../displayFriends/" + input;
    var xhttp = new XMLHttpRequest();
    xhttp.onreadystatechange = function() {
 
