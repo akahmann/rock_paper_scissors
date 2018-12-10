@@ -16,7 +16,7 @@ function login() {
             switchToLoggedIn(username);
          }
          else {
-            document.getElementById("main_body").innerHTML = "Incorrect username or password";
+            document.getElementById("error_message").innerHTML = "Incorrect username or password";
          }
       }
    };
@@ -45,7 +45,7 @@ function createAccount() {
          switchToLoggedIn(username);
       }
       else {
-         document.getElementById("main_body").innerHTML = "Error creating account, try different username";
+         document.getElementById("error_message").innerHTML = "Error creating account, try different username";
       }
    };
    xhttp.open("POST", url, true);
@@ -69,7 +69,7 @@ function logout() {
             switchToLogin();
          }
          else {
-            document.getElementById("main_body").innerHTML = "Error logging out";
+            document.getElementById("error_message").innerHTML = "Error logging out";
          }
       }
    };
