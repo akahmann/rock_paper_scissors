@@ -17,6 +17,7 @@ function login() {
          }
          else {
             document.getElementById("error_message").innerHTML = "Incorrect username or password";
+            document.getElementById("success_message").innerHTML = "";
          }
       }
    };
@@ -43,9 +44,12 @@ function createAccount() {
    xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200 && JSON.parse(this.responseText).success == true) {
          switchToLogin();
+         document.getElementById("error_message").innerHTML = "";
+         document.getElementById("success_message").innerHTML = "Successful Created Account";
       }
       else {
          document.getElementById("error_message").innerHTML = "Error creating account, try different username";
+         document.getElementById("success_message").innerHTML = "";
       }
    };
    xhttp.open("POST", url, true);
@@ -70,6 +74,7 @@ function logout() {
          }
          else {
             document.getElementById("error_message").innerHTML = "Error logging out";
+            document.getElementById("success_message").innerHTML = "";
          }
       }
    };
@@ -113,10 +118,8 @@ function switchToLogin() {
    var html = "<h2>Login</h2>\n"
             + "<div id=\"error_message\"></div>\n"
             + "<div id=\"success_message\"></div>\n"
-            + "Username: <input type=\"text\" value=\"Apple\""
-            + "id=\"login_username\">\n<br>\n"
-            + "Password: <input type=\"password\" value=\"apple\""
-            + "id=\"login_password\">\n<br>\n"
+            + "Username: <input type=\"text\"id=\"login_username\">\n<br>\n"
+            + "Password: <input type=\"password\"id=\"login_password\">\n<br>\n"
             + "<button type=\"button\" onclick=\"switchToCreate()\">"
             + "Create Account</button>\n"
             + "<button type=\"button\" onclick=\"login()\">"
