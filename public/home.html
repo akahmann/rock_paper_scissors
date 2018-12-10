@@ -13,13 +13,16 @@
 
 <div class="midbody" id="main_body">
    <h2>Login</h2>
+   <div id="error_message"></div>
    Username: <input type="text" value="Apple" id="login_username">
    <br>
    Password: <input type="password" value="apple" id="login_password">
    <br>
-   <button type="button" onclick="crtAccount()">Create Account</button>
+   <button type="button" onclick="switchToCreate()">Create Account</button>
    <button type="button" onclick="login()">Login</button>
 </div>
+
+<div class="midbody" id="message"></div>
 
 <!-- <div class="midbody">
    <h2>Create Account</h2>

@@ -1,10 +1,37 @@
 const { Pool } = require("pg");
 
-//var dbName = "postgres://xyvynfzkbbhyte:1fa921bcd8c58b9b2c9fdbdb341f48718df4fb4f8d8c97534b643942ad66bb7e@ec2-54-83-8-246.compute-1.amazonaws.com:5432/d5hn9ej1pf6kn";
-var dbName = process.env.DATABASE_URL || "postgres://pbjuser:rosebud@localhost:5432/pbjgame";
+var dbName = "postgres://xyvynfzkbbhyte:1fa921bcd8c58b9b2c9fdbdb341f48718df4fb4f8d8c97534b643942ad66bb7e@ec2-54-83-8-246.compute-1.amazonaws.com:5432/d5hn9ej1pf6kn";
+//var dbName = process.env.DATABASE_URL || "postgres://pbjuser:rosebud@localhost:5432/pbjgame";
 const dbConnectionString = process.env.DATABASE_URL || dbName;
 
 const pool = new Pool({connectionString: dbConnectionString});
+
+/********************************************************************
+* Find username and password for login
+********************************************************************/
+function checkUserLogin(username, password, callback) {
+   console.log("Finding person from DB with username: " + username + " and password: " + password);
+
+   var sql = "SELECT id FROM users WHERE username = $1::varchar AND password = $2::varchar";
+
+   var params = [username, password];
+
+   pool.query(sql, params, function(err, result) {
+
+      if (err) {
+         console.log("Error in query: ");
+         console.log(err);
+         callback(err, null);
+      }
+
+      //console.log("Found result: " + JSON.stringify(result.rows));
+      if (result.rows.length == 1)
+         callback(null, {success: true, id: result.rows[0].id});
+      else {
+         callback(null, {success: false});
+      }
+   });
+}
 
 /********************************************************************
 * Add a user account to the database.
@@ -23,11 +50,9 @@ function addUserToDb(username, password, callback) {
          console.log(err);
          callback(err, null);
       }
-
-      console.log("Adding to the database: " + username);
-
-      callback(null, {success: true});
-
+      else {
+         callback(null, {success: true});
+      }
    });
 }
 
@@ -107,6 +132,7 @@ function getUserFromDb(id, callback) {
 }
 
 module.exports = {
+   checkUserLogin : checkUserLogin,
    addUserToDb: addUserToDb,
    addFriendToDb: addFriendToDb,
    getFriendsFromDb: getFriendsFromDb,

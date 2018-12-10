@@ -16,6 +16,14 @@ h2 {
    font-size: 28px;
 }
 
+#error_message {
+   color : rgb(191, 30, 30);
+   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+   text-align: center;
+   font-size: 20px;
+}
+
+
 .midbody {
    background-color: rgb(135, 163, 135);
    opacity: 0.5;
