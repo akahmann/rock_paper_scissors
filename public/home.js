@@ -42,7 +42,7 @@ function createAccount() {
 
    xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200 && JSON.parse(this.responseText).success == true) {
-         switchToLoggedIn(username);
+         switchToLogin();
       }
       else {
          document.getElementById("error_message").innerHTML = "Error creating account, try different username";
@@ -112,6 +112,7 @@ function switchToLogin() {
 
    var html = "<h2>Login</h2>\n"
             + "<div id=\"error_message\"></div>\n"
+            + "<div id=\"success_message\"></div>\n"
             + "Username: <input type=\"text\" value=\"Apple\""
             + "id=\"login_username\">\n<br>\n"
             + "Password: <input type=\"password\" value=\"apple\""
@@ -133,6 +134,7 @@ function switchToLoggedIn(username) {
 
    var html = "<h2>Welcome " + username + "</h2>\n"
             + "<div id=\"error_message\"></div>\n"
+            + "<div id=\"success_message\"></div>\n"
             + "<button type=\"button\" onclick=\"displayFriends()\">\n"
             + "Display Friends</button>\n<br><br>\n"
             + "<div id=\"results\">\n</div>\n<br>\n"
@@ -151,6 +153,7 @@ function switchToCreate() {
 
    var html = "<h2>Create Account</h2>\n"
             + "<div id=\"error_message\"></div>\n"
+            + "<div id=\"success_message\"></div>\n"
             + "Username: <input type=\"text\""
             + "id=\"new_username\">\n<br>\n"
             + "Password: <input type=\"password\""
