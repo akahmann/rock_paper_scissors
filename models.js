@@ -61,6 +61,8 @@ function addUserToDb(username, password, callback) {
 ********************************************************************/
 function addFriendToDb(user_id, id, callback) {
 
+   console.log("INSERT new friend connection");
+
    var sql = "INSERT INTO friends (user_id, friend_id) "
            + "VALUES ($1::int, $2::int), ($2::int, $1::int)";
 
@@ -82,6 +84,80 @@ function addFriendToDb(user_id, id, callback) {
 }
 
 /********************************************************************
+* Add a game to the database.
+********************************************************************/
+function addGameToDb(player1_id, player2_id, callback) {
+
+   console.log("INSERT new game connection");
+
+   var sql = "INSERT INTO games (player1_id, player2_id, option1, option2) "
+           + "VALUES ($1::int, $2::int, 'n', 'n')";
+
+   var params = [player1_id, player2_id];
+
+   pool.query(sql, params, function(err, result) {
+
+      if (err) {
+         console.log("Error in query: ");
+         console.log(err);
+         callback(err, null);
+      }
+
+      callback(null, {success: true});
+
+   });
+}
+
+/********************************************************************
+* Update option1 to database
+********************************************************************/
+function updateOption1ToDb(game_id, option1, callback) {
+
+   console.log("UPDATE option1");
+
+   var sql = "UPDATE games SET option1 = $2::char WHERE id = $1::int";
+
+   var params = [game_id, option1];
+
+   pool.query(sql, params, function(err, result) {
+
+      if (err) {
+         console.log("Error in query: ");
+         console.log(err);
+         callback(err, null);
+      }
+
+      callback(null, {success: true});
+
+   });
+}
+
+/********************************************************************
+* Update option2 to database
+********************************************************************/
+function updateOption2ToDb(game_id, option2, callback) {
+
+   console.log("UPDATE option2");
+
+   var sql = "UPDATE games SET option2 = $2::char WHERE id = $1::int";
+
+   var params = [game_id, option2];
+
+   pool.query(sql, params, function(err, result) {
+
+      if (err) {
+         console.log("Error in query: ");
+         console.log(err);
+         callback(err, null);
+      }
+
+      callback(null, {success: true});
+
+   });
+}
+
+
+/********************************************************************
 * Display all friends of a user from the database.
 ********************************************************************/
 function getFriendsFromDb(id, callback) {
@@ -89,6 +165,35 @@ function getFriendsFromDb(id, callback) {
    console.log("Getting all friends from DB from user with id: " + id);
 
    var sql = "SELECT u.id, username FROM users u JOIN friends f ON f.friend_id = u.id WHERE f.user_id = $1::int";
+
+   var params = [id];
+
+   pool.query(sql, params, function(err, result) {
+
+      if (err) {
+         console.log("Error in query: ");
+         console.log(err);
+         callback(err, null);
+      }
+
+      console.log("Found result: " + JSON.stringify(result.rows));
+
+      callback(null, result.rows);
+
+   });
+}
+
+/********************************************************************
+* Display all games of a user from the database.
+********************************************************************/
+function getGamesFromDb(id, callback) {
+
+   console.log("Getting all friends from DB from user with id: " + id);
+
+   var sql = "";
+   sql += "SELECT g.id AS game_id, u.id, u.username, g.player1_id, g.player2_id, g.option1, g.option2"
+       + " FROM users u JOIN games g ON (g.player1_id = u.id OR g.player2_id = u.id)"
+       + " WHERE (g.player1_id = $1::int OR g.player2_id = $1::int)";
 
    var params = [id];
 
@@ -131,10 +236,64 @@ function getUserFromDb(id, callback) {
    });
 }
 
+/********************************************************************
+* Find a user with username from database to find id.
+********************************************************************/
+function getUserByNameFromDb(username, callback) {
+   console.log("In the FUNCTION");
+   console.log("Getting friend from DB with username: " + username);
+
+   var sql = "SELECT id FROM users WHERE username = $1::varchar";
+
+   var params = [username];
+
+   pool.query(sql, params, function(err, result) {
+
+      if (err) {
+         console.log("Error in query: ");
+         console.log(err);
+         callback(err, null);
+      }
+
+      console.log("Found result: " + JSON.stringify(result.rows));
+
+      callback(null, result.rows);
+   });
+}
+
+/********************************************************************
+* Find game from database to update it.
+********************************************************************/
+function getGameFromDb(id, callback) {
+
+   var sql = "SELECT id, player1_id, player2_id, option1, option2 FROM users WHERE id = $1::int";
+
+   var params = [username];
+
+   pool.query(sql, params, function(err, result) {
+
+      if (err) {
+         console.log("Error in query: ");
+         console.log(err);
+         callback(err, null);
+      }
+
+      console.log("Found result: " + JSON.stringify(result.rows));
+
+      callback(null, result.rows);
+   });
+}
+
 module.exports = {
    checkUserLogin : checkUserLogin,
-   addUserToDb: addUserToDb,
-   addFriendToDb: addFriendToDb,
-   getFriendsFromDb: getFriendsFromDb,
-   getUserFromDb: getUserFromDb
+   addUserToDb : addUserToDb,
+   addFriendToDb : addFriendToDb,
+   addGameToDb : addGameToDb,
+   updateOption1ToDb : updateOption1ToDb,
+   updateOption2ToDb : updateOption2ToDb,
+   getFriendsFromDb : getFriendsFromDb,
+   getGamesFromDb : getGamesFromDb,
+   getUserFromDb : getUserFromDb,
+   getUserByNameFromDb : getUserByNameFromDb,
+   getGameFromDb : getGameFromDb
 };

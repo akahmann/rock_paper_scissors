@@ -11,7 +11,6 @@ function login(req, res) {
    var password = req.params.password;
 
    models.checkUserLogin(username, password, function(error, result) {
-      console.log("Back from the database with result: " + result);
       if (error || result == null) {
          res.status(500).json({success: false, data: error});
       }
@@ -43,16 +42,38 @@ function logout(req, res) {
 }
 
 /********************************************************************
+* Logout in the user.
+********************************************************************/
+function isLoggedIn(req, res) {
+
+   var id = 0;
+
+   console.log("SESSION VARIABLE IS: " + req.session.current_id);
+
+   if (req.session.current_id) {
+      id = req.session.current_id;
+   }
+
+   models.getUserFromDb(id, function(error, result) {
+      if (error || result == null || result.length != 1) {
+         res.status(500).json({success: false, data: error});
+      }
+      else {
+         var username = result[0];
+         res.status(200).json(result[0]);
+      }
+   });
+}
+
+/********************************************************************
 * Add a user account to the database.
 ********************************************************************/
 function createUser(req, res) {
-   console.log("Creating user");
 
    var username = req.params.username;
    var password = req.params.password;
 
    models.addUserToDb(username, password, function(error, result) {
-      console.log("Back from the database with result: " + result);
       if (error || result == null) {
          res.status(500).json({success: false, data: error});
       }
@@ -66,9 +87,11 @@ function createUser(req, res) {
 * Add a friend connection to the database.
 ********************************************************************/
 function addFriend(req, res) {
-   console.log("Adding friend");
 
-   var user_id = req.params.user_id;
+   console.log("Add friend");
+
+   var user_id = req.session.current_id;
+   console.log("This is user_id: " + user_id);
    var id = req.params.id;
 
    models.addFriendToDb(user_id, id, function(error, result) {
@@ -83,18 +106,16 @@ function addFriend(req, res) {
 }
 
 /********************************************************************
-* Display all friends of a user from the database.
+* Create a game between two users.
 ********************************************************************/
-function displayFriends(req, res) {
-   console.log("Displaying all friends");
+function createGame(req, res) {
 
-   var id = req.session.current_id;
+   console.log("Add friend");
 
-   console.log("This is session id: ");
-   console.log(req.session.current_id);
+   var player1_id = req.session.current_id;
+   var player2_id = req.params.id;
 
-   models.getFriendsFromDb(id, function(error, result) {
-      console.log("Back from the database with result: " + result);
+   models.addGameToDb(player1_id, player2_id, function(error, result) {
       if (error || result == null) {
          res.status(500).json({success: false, data: error});
       }
@@ -105,20 +126,112 @@ function displayFriends(req, res) {
 }
 
 /********************************************************************
-* Add a friend connection to the database.
+* Player1 picks for option1
+********************************************************************/
+function pickOption1(req, res) {
+
+   console.log("Picking For Option1");
+
+   var game_id = req.params.game_id;
+   var option1 = req.params.option1;
+
+   models.updateOption1ToDb(game_id, option1, function(error, result) {
+      if (error || result == null) {
+         res.status(500).json({success: false, data: error});
+      }
+      else {
+         res.status(200).json(result);
+      }
+   });
+}
+
+/********************************************************************
+* Player2 picks for option2
+********************************************************************/
+function pickOption2(req, res) {
+
+   console.log("Picking For Option2");
+
+   var game_id = req.params.game_id;
+   var option2 = req.params.option2;
+
+   models.updateOption2ToDb(game_id, option2, function(error, result) {
+      if (error || result == null) {
+         res.status(500).json({success: false, data: error});
+      }
+      else {
+         res.status(200).json(result);
+      }
+   });
+}
+
+/********************************************************************
+* Display all friends of a user from the database.
+********************************************************************/
+function displayFriends(req, res) {
+
+   var id = req.session.current_id;
+
+   models.getFriendsFromDb(id, function(error, result) {
+      if (error || result == null) {
+         res.status(500).json({success: false, data: error});
+      }
+      else {
+         res.status(200).json(result);
+      }
+   });
+}
+
+/********************************************************************
+* Display all games of a user from the database.
+********************************************************************/
+function displayGames(req, res) {
+
+   var id = req.session.current_id;
+
+   models.getGamesFromDb(id, function(error, result) {
+      if (error || result == null) {
+         res.status(500).json({success: false, data: error});
+      }
+      else {
+         res.status(200).json(result);
+      }
+   });
+}
+
+/********************************************************************
+* Find a user from the database
 ********************************************************************/
 function getUser(req, res) {
-   console.log("Getting a user");
 
-   var id = req.params.id;
+   var username = req.params.username;
 
-   models.getUserFromDb(id, function(error, result) {
-      console.log("Back from the database with result:", result);
+   console.log("START");
+
+   models.getUserByNameFromDb(username, function(error, result) {
       if (error || result == null || result.length != 1) {
          res.status(500).json({success: false, data: error});
       }
       else {
-         var username = result[0];
+         res.status(200).json(result[0]);
+      }
+   });
+}
+
+/********************************************************************
+* Find a game from the database
+********************************************************************/
+function getGame(req, res) {
+
+   var id = req.params.game_id;
+
+   console.log("Getting game from DB");
+
+   models.getGameFromDb(id, function(error, result) {
+      if (error || result == null || result.length != 1) {
+         res.status(500).json({success: false, data: error});
+      }
+      else {
          res.status(200).json(result[0]);
       }
    });
@@ -127,8 +240,14 @@ function getUser(req, res) {
 module.exports = {
    login : login,
    logout : logout,
-   createUser: createUser,
-   addFriend: addFriend,
-   displayFriends: displayFriends,
-   getUser: getUser
+   isLoggedIn : isLoggedIn,
+   createUser : createUser,
+   addFriend : addFriend,
+   createGame : createGame,
+   pickOption1 : pickOption1,
+   pickOption2 : pickOption2,
+   displayFriends : displayFriends,
+   displayGames : displayGames,
+   getUser : getUser,
+   getGame : getGame
 };

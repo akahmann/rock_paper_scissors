@@ -6,7 +6,7 @@ h1 {
    color : rgb(88, 211, 109);
    font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
    text-align: center;
-   font-size: 60px;
+   font-size: 50px;
 }
 
 h2 {
@@ -14,6 +14,113 @@ h2 {
    font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
    text-align: center;
    font-size: 28px;
+}
+
+h3 {
+   color : rgb(145, 59, 33);
+   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+   text-align: center;
+   font-size: 18px;
+}
+
+h4 {
+   color : #eada75;
+   text-shadow:
+   0px -2px 4px #f4c8c8,
+   0px -2px 10px #e8d55c,
+   0px -10px 20px #F90,
+   0px -20px 40px #C33;
+   font-size: 40px;
+}
+
+h5 {
+   color : rgb(145, 59, 33);
+   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+   text-align: center;
+   font-size: 28px;
+}
+
+span {
+   color : rgb(155, 255, 155);
+   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+   text-align: center;
+   font-size: 14px;
+
+}
+
+.flex-box {
+    display: flex;
+    justify-content: space-around;
+}
+
+#rock {
+    opacity: 0.65;
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+    height: auto;
+    max-width: 250px;
+    margin-left: 2%;
+    margin-bottom: 5px;
+    align-self: center;
+}
+
+#rock:hover {
+   opacity: 1;
+}
+
+#paper {
+    opacity: 0.65;
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+    height: auto;
+    max-width: 250px;
+    margin-left: 2%;
+    margin-bottom: 5px;
+    align-self: center;
+}
+
+#paper:hover {
+   opacity: 1;
+}
+
+#scissors {
+    opacity: 0.65;
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+    height: auto;
+    max-width: 250px;
+    margin-left: 2%;
+    margin-bottom: 5px;
+    align-self: center;
+}
+
+#scissors:hover {
+   opacity: 1;
+}
+
+#selected_pic {
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+    height: auto;
+    max-width: 250px;
+    margin-left: 2%;
+    margin-bottom: 5px;
+    align-self: center;
+}
+
+#gif {
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+    height: auto;
+    max-width: 400px;
+    margin-left: 2%;
+    margin-bottom: 5px;
+    align-self: center;
 }
 
 #error_message {
@@ -30,6 +137,33 @@ h2 {
    font-size: 20px;
 }
 
+#error_message_add {
+   color : rgb(191, 30, 30);
+   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+   text-align: center;
+   font-size: 20px;
+}
+
+#success_message_add {
+   color : rgb(155, 255, 155);
+   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+   text-align: center;
+   font-size: 20px;
+}
+
+#error_message_friends {
+   color : rgb(191, 30, 30);
+   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+   text-align: center;
+   font-size: 20px;
+}
+
+#success_message_friends {
+   color : rgb(155, 255, 155);
+   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+   text-align: center;
+   font-size: 20px;
+}
 
 .midbody {
    background-color: rgb(135, 163, 135);
@@ -75,6 +209,22 @@ input[type=password] {
 
 input[type=text]:hover {
    border: 2px solid #00ff00;
+}
+
+#sub_button {
+   background-color: rgb(17, 38, 17);
+   border: 3px solid #aa4729;
+   opacity: 0.8;
+   font-size: 16px;
+   font-weight: bold;
+   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+   color: rgb(242, 112, 72);
+   border-radius: 4px;
+   padding: 10px;
+}
+
+#sub_button:hover {
+   border: 3px solid #f27048;
 }
 
 button[type=button] {
