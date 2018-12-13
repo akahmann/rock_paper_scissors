@@ -180,7 +180,7 @@ function updateGamePage(opponent_username, username, game_id, opponent_id, playe
       if (this.readyState == 4 && this.status == 200 && JSON.parse(this.responseText).length != 0) {
          console.log(JSON.parse(this.responseText));
          var obj = JSON.parse(this.responseText);
-         opponent_id = obj.id;
+         game_id = obj.id;
          player1_id = obj.player1_id;
          player2_id = obj.player2_id;
          option1 = obj.option1;
