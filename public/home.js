@@ -159,10 +159,12 @@ function playGame(opponent_username, username, game_id, opponent_id, player1_id,
 function updateGamePage(opponent_username, username, game_id, opponent_id, player1_id, player2_id, option1, option2) {
 
    var url = "../getGame/" + game_id;
+   console.log("This is url: " + url);
    var xhttp = new XMLHttpRequest();
    xhttp.onreadystatechange = function() {
 
       if (this.readyState == 4 && this.status == 200 && JSON.parse(this.responseText).length != 0) {
+         console.log(JSON.parse(this.responseText));
          var obj = JSON.parse(this.responseText);
          opponent_id = obj.id;
          player1_id = obj.player1_id;

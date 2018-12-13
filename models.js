@@ -266,9 +266,9 @@ function getUserByNameFromDb(username, callback) {
 ********************************************************************/
 function getGameFromDb(id, callback) {
 
-   var sql = "SELECT id, player1_id, player2_id, option1, option2 FROM users WHERE id = $1::int";
+   var sql = "SELECT id, player1_id, player2_id, option1, option2 FROM games WHERE id = $1::int";
 
-   var params = [username];
+   var params = [id];
 
    pool.query(sql, params, function(err, result) {
 
