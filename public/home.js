@@ -134,7 +134,7 @@ function playGame(opponent_username, username, game_id, opponent_id, player1_id,
                  + "Back</button><br>";
       }
       else {
-         console.log("isPlayer2 is true");
+         console.log("isPlayer1 is false");
          //winning case scenarios
          if ((option2 == 'r' && option1 == 's') ||
              (option2 == 'p' && option1 == 'r') ||
@@ -182,7 +182,7 @@ function updateGamePage(opponent_username, username, game_id, opponent_id, playe
          option1 = obj.option1;
          option2 = obj.option2;
       }
-
+      console.log("In updateGamePage opponent_id is: " + opponent_id);
       playGame(opponent_username, username, game_id, opponent_id, player1_id, player2_id, option1, option2);
 
    };
