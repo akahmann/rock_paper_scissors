@@ -105,6 +105,8 @@ function playGame(opponent_username, username, game_id, opponent_id, player1_id,
            + game_id + "', '" + opponent_id + "', '" + player1_id + "', '"
            + player2_id + "', '" + option1 + "', '"
            + option2 + "')\">Update Page</button><br><br>"
+      console.log("This is option1: " + option1);
+      console.log("This is option2: " + option2);
       //Then both users must have selected their options
       if (isPlayer1) {
          //winning case scenarios
