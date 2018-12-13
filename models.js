@@ -193,8 +193,7 @@ function getGamesFromDb(id, callback) {
    var sql = "";
    sql += "SELECT g.id AS game_id, u.id, u.username, g.player1_id, g.player2_id, g.option1, g.option2"
        + " FROM users u JOIN games g ON (g.player1_id = u.id OR g.player2_id = u.id)"
-       + " WHERE (g.player1_id = $1::int OR g.player2_id = $1::int)"
-       + " AND (option1 == 'n' OR option2 == 'n')";
+       + " WHERE (g.player1_id = $1::int OR g.player2_id = $1::int)";
 
    var params = [id];
 
