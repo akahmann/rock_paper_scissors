@@ -99,6 +99,12 @@ function playGame(opponent_username, username, game_id, opponent_id, player1_id,
            + "Back</button><br>";
    }
    else {
+      html += "<span>Press update page to see if you opponent has made their selection</span>"
+           + "<br><br><button type=\"button\" onclick=\""
+           + "updateGamePage('" + opponent_username + "', '" + username + "', '"
+           + game_id + "', '" + opponent_id + "', '" + player1_id + "', '"
+           + player2_id + "', '" + option1 + "', '"
+           + option2 + "')\">Update Page</button><br><br>"
       //Then both users must have selected their options
       if (isPlayer1) {
          //winning case scenarios
