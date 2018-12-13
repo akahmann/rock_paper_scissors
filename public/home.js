@@ -95,25 +95,11 @@ function playGame(opponent_username, username, game_id, opponent_id, player1_id,
            + "updateGamePage('" + opponent_username + "', '" + username + "', '"
            + game_id + "', '" + opponent_id + "', '" + player1_id + "', '"
            + player2_id + "', '" + option1 + "', '"
-           + option2 + "')\">Update Page</button><br><br>"
-
-           + "<button type=\"button\" onclick=\""
-           + "switchToLoggedIn('" + username + "')\">"
-           + "Back</button><br>";
+           + option2 + "')\">Update Page</button><br><br>";
    }
    else {
-      html += "<span>Press update page to see if you opponent has made their selection</span>"
-           + "<br><br><button type=\"button\" onclick=\""
-           + "updateGamePage('" + opponent_username + "', '" + username + "', '"
-           + game_id + "', '" + opponent_id + "', '" + player1_id + "', '"
-           + player2_id + "', '" + option1 + "', '"
-           + option2 + "')\">Update Page</button><br><br>";
-
-      console.log("This is option1: " + option1);
-      console.log("This is option2: " + option2);
       //Then both users must have selected their options
       if (isPlayer1) {
-         console.log("isPlayer1 is true");
          //winning case scenarios
          if ((option1 == 'r' && option2 == 's') ||
              (option1 == 'p' && option2 == 'r') ||
@@ -138,7 +124,6 @@ function playGame(opponent_username, username, game_id, opponent_id, player1_id,
                  + "Back</button><br>";
       }
       else {
-         console.log("isPlayer1 is false");
          //winning case scenarios
          if ((option2 == 'r' && option1 == 's') ||
              (option2 == 'p' && option1 == 'r') ||
@@ -173,7 +158,6 @@ function playGame(opponent_username, username, game_id, opponent_id, player1_id,
 function updateGamePage(opponent_username, username, game_id, opponent_id, player1_id, player2_id, option1, option2) {
 
    var url = "../getGame/" + game_id;
-   console.log("This is url: " + url);
    var xhttp = new XMLHttpRequest();
    xhttp.onreadystatechange = function() {
 
@@ -186,7 +170,6 @@ function updateGamePage(opponent_username, username, game_id, opponent_id, playe
          option1 = obj.option1;
          option2 = obj.option2;
       }
-      console.log("In updateGamePage opponent_id is: " + opponent_id);
       playGame(opponent_username, username, game_id, opponent_id, player1_id, player2_id, option1, option2);
 
    };
