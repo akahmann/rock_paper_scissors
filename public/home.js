@@ -109,6 +109,7 @@ function playGame(opponent_username, username, game_id, opponent_id, player1_id,
       console.log("This is option2: " + option2);
       //Then both users must have selected their options
       if (isPlayer1) {
+         console.log("isPlayer1 is true");
          //winning case scenarios
          if ((option1 == 'r' && option2 == 's') ||
              (option1 == 'p' && option2 == 'r') ||
@@ -133,6 +134,7 @@ function playGame(opponent_username, username, game_id, opponent_id, player1_id,
                  + "Back</button><br>";
       }
       else {
+         console.log("isPlayer2 is true");
          //winning case scenarios
          if ((option2 == 'r' && option1 == 's') ||
              (option2 == 'p' && option1 == 'r') ||
