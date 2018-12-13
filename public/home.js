@@ -9,6 +9,9 @@ function playGame(opponent_username, username, game_id, opponent_id, player1_id,
    var opponent_selected = false;
    var youSelected = "";
 
+   console.log("In playGame opponent_id is: " + opponent_id);
+   console.log("In playGame player1_id is: " + opponent_id);
+
    if (opponent_id != player1_id)
       isPlayer1 = true;
    //otherwise they must be player2
